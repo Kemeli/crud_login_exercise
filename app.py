@@ -15,9 +15,7 @@ def login():
 		global user
 		user = request.form['username']
 		password = request.form['password']
-		db = get_db_connection()
-		# if get_user(user, db) is None or  get_password(password, db) is None:
-		if verify_login_data(db, user, password):
+		if verify_login_data(user, password):
 			return redirect(url_for('home'))
 		else:
 			return render_template("login.html", message="invalid user or password")
