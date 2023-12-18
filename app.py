@@ -1,13 +1,19 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for
 from handle_db import *
 
 app = Flask(__name__)
+
+user = ''
 
 @app.route('/')
 def index():
 	return render_template('index.html')
 
-user = ''
+
+@app.route('/home', methods=('GET', 'POST'))
+def home():
+	return render_template("home.html")
+
 
 @app.route('/login', methods=('GET', 'POST'))
 def login():
@@ -33,11 +39,6 @@ def signup():
 		return redirect(url_for('login'))
 	else:
 		return render_template("signup.html")
-
-
-@app.route('/home', methods=('GET', 'POST'))
-def home():
-	return render_template("home.html")
 
 
 @app.route('/update', methods=('GET', 'POST'))
